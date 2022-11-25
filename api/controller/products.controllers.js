@@ -18,19 +18,25 @@ const getProductById = async (req,res) => {
         return res.status(500).json(error)
     }
 };
-const postNewProducts = async (req, res) => {
+const postNewProducts = async (req, res, next) => {
     try {
         console.log(req.body)
-        
         const newProduct = new Products (req.body);
+        if(req.file){
+            newProduct.productImage = req.file.path
+        }
         const createdProduct = await newProduct.save();
-        return res.status(201).json(createdProduct);
+
+        res.status(201).json(createdProduct);
+        return next();
     } catch (error) {
-        return res.status(500).json(error)
+        res.status(500).json(error)
+        return next();
     }
+    
 };
 
-const putProducts = async (req,res) => {
+const putProducts = async (req,res, next) => {
     try {                                                 
         const {id} = req.params;
         const putProducts = new Products(req.body);
@@ -40,10 +46,15 @@ const putProducts = async (req,res) => {
         if(!ProductsDb){
             return res.status(404).json({"message": "Products not found"});
         }
-        return res.status(200).json(ProductsDb);
+        if(req.file){
+            putProducts.productImage = req.file.path
+        }
+        res.status(200).json(ProductsDb);
+        return next();
 
     } catch (error) {
-        return res.status(500).json(error)
+        res.status(500).json(error);
+        return next();
     }
 }; 
 

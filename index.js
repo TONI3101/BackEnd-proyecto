@@ -34,9 +34,9 @@ app.use((req, res, next) => {
 })
 
 app.use(cors({
-  origin: '*',
-  credentials: true,
-}));//securizar
+  origin: ['http://localhost:5000', 'http://localhost:8000'],
+  credentials: true, 
+}));
 
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
@@ -51,9 +51,9 @@ app.use('*', (req,res,next) => {
   return res.status(404).json("Route not found")
 });
 
-app.use((error, req, res, next) => {
-  return res.status( error.status || 500 ).json("Error: " + error.message || "Unexpected error");
-});
+// app.use((error, req, res, next) => {
+//   return res.status( error.status || 500 ).json("Error: " + error.message || "Unexpected error");
+// });
 
 
 app.listen(PORT, () => console.log(`listening on port:http://localhost:${PORT}`));

@@ -70,7 +70,7 @@ const logout = (req, res) => {
     }
 };
 
-const putUsers = async (req,res) => {
+const putUsers = async (req,res, next) => {
     try {
         const {id} = req.params;
         const putUsers = new Users(req.body);
@@ -79,9 +79,14 @@ const putUsers = async (req,res) => {
         if (!UsersDb) {
             return res.status(404).json({"message":"Entry not found"});
         }
-        return res.status(201).json(UsersDb);
+        if(req.file){
+            putUsers.userImage = req.file.path
+        }
+        res.status(201).json(UsersDb);
+        return next();
     } catch (error) {
-        return res.status(500).json(error)
+        res.status(500).json(error);
+        return next();
     }
 };
 
