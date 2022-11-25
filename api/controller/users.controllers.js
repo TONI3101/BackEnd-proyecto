@@ -1,7 +1,7 @@
 const Users = require('../modelos/users.models');
 const bcrypt = require('bcrypt');
-const { validationPassword, validationEmail } = require('../validators/validation');
-const { generateSign } = require('../jwt/jwt');
+const { validationPassword, validationEmail } = require('../../validators/validation');
+const { generateSign } = require('../../jwt/jwt');
 
 const getAllUsers = async (req,res) => {
     try {
@@ -22,17 +22,22 @@ const getUsers = async (req,res) => {
     }
 };
 
-const register = async (req, res) => {
+const register = async (req, res, next) => {
     try {
         console.log(req.body);
         const newUsers = new Users(req.body);
         if(!validationEmail(req.body.userMail)){
             console.log({code: 403, message: "Invalid email"})
-            res.status(403).send({code: 403, message: "Invalid email"});
+            res.status(403).send({code: 403, message: "Invalid email"})
+            return next();
         }
         if(!validationPassword(req.body.password)){
             console.log({code: 403, message: "Invalid password"})
             res.status(403).send({code: 403, message: "Invalid password"})
+            return next();
+        }
+        if(req.file){
+            newUsers.userImage = req.file.path
         }
         newUsers.password = bcrypt.hashSync(newUsers.password, 10);
         const createdUser = await newUsers.save();

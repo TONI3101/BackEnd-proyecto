@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {isAuth} = require('../middlewares/auth');
+const {isAuth} = require('../../middlewares/auth');
 
 const {getAllProducts, getProductById, postNewProducts, putProducts, deleteProducts } = require('../controller/products.controllers');
 

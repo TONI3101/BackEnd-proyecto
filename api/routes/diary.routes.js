@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {isAuth} = require('../middlewares/auth');
+const {isAuth} = require('../../middlewares/auth');
 
 const {getAllDiary, getDiaryById, postNewDiary, putDiary, deleteDiary } = require('../controller/diary.controller');
 

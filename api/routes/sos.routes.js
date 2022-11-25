@@ -1,6 +1,7 @@
 const express = require('express');
+
 const router = express.Router();
-const {isAuth} = require('../middlewares/auth');
+const {isAuth} = require('../../middlewares/auth');
 
 const {getAllSos, getSostById, postNewSos, putSos, deleteSos} = require('../controller/sos.controller');
 
