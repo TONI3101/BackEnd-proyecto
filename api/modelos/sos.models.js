@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const sosSchema = new Schema (
     {
-        insuranceNumber: {type: String, required: true},
+        insuranceNumber: {type: Number, required: true},
         secureName: {type: String, required: true},
         contactName: {type: String, required: true},
         contactMail: {type: String, required: true},
