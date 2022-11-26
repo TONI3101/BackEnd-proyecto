@@ -53,7 +53,7 @@ const login = async (req, res) => {
         const userInfo = await Users.findOne({userMail: req.body.userMail});
         if (bcrypt.compareSync(req.body.password, userInfo.password)){          
             const token = generateSign(userInfo._id, userInfo.userMail);
-            return res.status(200).json(token);
+            return res.status(200).json({token, userInfo});
         } else {
             return res.status(400).json({message: "Invalid password"});
         }
