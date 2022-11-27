@@ -9,12 +9,12 @@ const router = express.Router();
 
 
 router.get('/', getAllUsers);
-router.get('/:id', [isAuth], getUsers);
+router.get('/:id', getUsers);
 router.post('/register',upload.single('userImage'), register);
 router.post('/login', login);
 router.post('/logout', [isAuth], logout);
 router.put('/:id', upload.single('userImage'), putUsers);
-router.delete('/:id', deleteUsers);
+router.delete('/:id',[isAuth], deleteUsers);
 
 
 module.exports = router; 

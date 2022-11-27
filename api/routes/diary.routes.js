@@ -8,9 +8,9 @@ const {getAllDiary, getDiaryById, postNewDiary, putDiary, deleteDiary } = requir
 
 
 router.get('/',getAllDiary);
-router.get('/:id', [isAuth], getDiaryById)
+router.get('/:id', getDiaryById)
 router.post('/', postNewDiary);
-router.put('/:id', [isAuth], putDiary );
+router.put('/:id', putDiary );
 router.delete('/:id', deleteDiary );
 
 
