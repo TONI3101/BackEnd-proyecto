@@ -20,10 +20,10 @@ const getSostById = async (req,res) => {
 };
 const postNewSos = async (req, res) => {
     try {
-        console.log(req.body)
         
         const newSos = new Sos (req.body);
         const createdSos = await newSos.save();
+        console.log(createdSos);
         return res.status(201).json(createdSos);
     } catch (error) {
         return res.status(500).json(error)

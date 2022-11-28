@@ -24,7 +24,7 @@ const getUsers = async (req,res) => {
 
 const register = async (req, res, next) => {
     try {
-        console.log(req.body);
+        // console.log(req.body);
         const newUsers = new Users(req.body);
         if(!validationEmail(req.body.userMail)){
             console.log({code: 403, message: "Invalid email"})
@@ -37,6 +37,7 @@ const register = async (req, res, next) => {
             return next();
         }
         if(req.file){
+            console.log(newUsers.userImage);
             newUsers.userImage = req.file.path
         }
         newUsers.password = bcrypt.hashSync(newUsers.password, 10);
@@ -49,7 +50,7 @@ const register = async (req, res, next) => {
 
 const login = async (req, res) => {
     try {
-        console.log(req.headers.authorization)
+        // console.log(req.headers.authorization)
         const userInfo = await Users.findOne({userMail: req.body.userMail});
         if (bcrypt.compareSync(req.body.password, userInfo.password)){          
             const token = generateSign(userInfo._id, userInfo.userMail);
