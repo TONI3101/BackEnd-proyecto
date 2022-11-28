@@ -72,21 +72,22 @@ const logout = (req, res) => {
 
 const putUsers = async (req,res, next) => {
     try {
+       
         const {id} = req.params;
         const putUsers = new Users(req.body);
         putUsers._id = id;
-        const UsersDb = await Users.findByIdAndUpdate(id, putUsers, {new: true});
-        if (!UsersDb) {
-            return res.status(404).json({"message":"Entry not found"});
-        }
+        // if (!UsersDb) {
+        //     return res.status(404).json({"message":"Entry not found"});
+        // }
         if(req.file){
             putUsers.userImage = req.file.path
         }
+        const UsersDb = await Users.findByIdAndUpdate(id, putUsers, {new: true});
+
         res.status(201).json(UsersDb);
-        return next();
     } catch (error) {
         res.status(500).json(error);
-        return next();
+        return next(error);
     }
 };
 
