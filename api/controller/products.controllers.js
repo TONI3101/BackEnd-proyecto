@@ -27,16 +27,16 @@ const postNewProducts = async (req, res, next) => {
         }
         const createdProduct = await newProduct.save();
 
-        res.status(201).json(createdProduct);
-        return next();
+        
+        return res.status(201).json(createdProduct);
     } catch (error) {
-        res.status(500).json(error)
-        return next();
+        
+        return res.status(500).json(error);
     }
     
 };
 
-const putProducts = async (req,res, next) => {
+const putProducts = async (req,res) => {
     try {                                                 
         const {id} = req.params;
         const putProducts = new Products(req.body);
@@ -49,12 +49,13 @@ const putProducts = async (req,res, next) => {
         if(req.file){
             putProducts.productImage = req.file.path
         }
-        res.status(200).json(ProductsDb);
-        return next();
+        
+        
+        return res.status(200).json(ProductsDb);
 
     } catch (error) {
-        res.status(500).json(error);
-        return next();
+        
+        return res.status(500).json(error);
     }
 }; 
 

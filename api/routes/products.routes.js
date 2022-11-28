@@ -10,7 +10,7 @@ const {getAllProducts, postNewProducts, putProducts, deleteProducts, getProductB
 router.get('/',getAllProducts);
 router.get('/:id', getProductById)
 router.post('/', upload.single('productImage'),[isAuth], postNewProducts);
-router.put('/:id',upload.single('productImage'), [isAuth], putProducts );
+router.put('/:id',upload.single('productImage'),[isAuth], putProducts );
 router.delete('/:id',[isAuth], deleteProducts );
 
 

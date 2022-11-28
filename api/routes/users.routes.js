@@ -14,7 +14,7 @@ router.post('/register',upload.single('userImage'), register);
 router.post('/login', login);
 router.post('/logout', [isAuth], logout);
 router.put('/:id', upload.single('userImage'), putUsers);
-router.delete('/:id',[isAuth], deleteUsers);
+router.delete('/:id', deleteUsers);
 
 
 module.exports = router; 

@@ -6,8 +6,8 @@ const {getAllAllergens, getAllergensById, postNewAllergens, putAllergens, delete
 
 router.get('/',getAllAllergens);
 router.get('/:id', getAllergensById )
-router.post('/', postNewAllergens);
-router.put('/:id', putAllergens );
+router.post('/',[isAuth], postNewAllergens);
+router.put('/:id',[isAuth], putAllergens );
 router.delete('/:id',[isAuth], deleteAllergens );
 
 
