@@ -8,7 +8,7 @@ const {getAllSos, getSostById, postNewSos, putSos, deleteSos} = require('../cont
 
 
 router.get('/',getAllSos);
-router.get('/:id', [isAuth], getSostById)
+router.get('/:id', getSostById)
 router.post('/', postNewSos);
 router.put('/:id', [isAuth], putSos );
 router.delete('/:id', deleteSos );
